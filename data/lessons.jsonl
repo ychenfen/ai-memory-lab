@@ -1,0 +1,5 @@
+{"id":"L20260218-001","trigger":"YAML 配置文件解析失败","lesson":"YAML 中冒号、引号、缩进问题会导致静默失败","prevention":"包含特殊字符的字段必须加引号；使用 yamllint 验证"}
+{"id":"L20260218-002","trigger":"社交媒体抓取工具无法登录","lesson":"Apple/Google SSO 登录的账号没有独立密码，传统登录方式失效","prevention":"抓取前确认登录方式；优先使用 cookie 导出或官方 API"}
+{"id":"L20260218-003","trigger":"MCP 工具连接失败","lesson":"Token 过期或未授权会导致工具静默不可用","prevention":"定期检查 token 状态；建立 MCP 健康检查机制"}
+{"id":"L20260218-004","trigger":"记忆文件超过 200 行","lesson":"热记忆过大导致上下文污染、成本上升","prevention":"定期归档；严格限制 MEMORY.md 行数"}
+{"id":"L20260218-005","trigger":"群聊中 bot 不响应","lesson":"Telegram bot 只能看到 @提及 或 /命令","prevention":"群聊中使用明确触发词；配置消息路由规则"}
