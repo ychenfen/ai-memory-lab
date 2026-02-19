@@ -99,9 +99,43 @@ browser-extension/
 - [ ] 自动化工作流
 - [ ] 与 Clawdbot 深度集成
 
+## ⚙️ 配置
+
+### Clawdbot API
+
+插件需要 Clawdbot 运行。检查状态：
+
+```bash
+clawdbot gateway status
+```
+
+如果未运行：
+
+```bash
+clawdbot gateway start
+```
+
+### API Endpoint
+
+当前配置：`http://localhost:18791`
+
+如果你的 Clawdbot 使用不同端口，修改 `sidepanel.js`：
+
+```javascript
+this.apiEndpoint = 'http://your-port/api/chat';
+```
+
+### 离线模式
+
+如果 Clawdbot 未运行，插件会以"演示模式"工作：
+- ✅ 页面提取 - 完全可用
+- ✅ 推特爬虫 - 完全可用
+- ✅ 脚本执行 - 完全可用
+- ⚠️  AI 对话 - 返回模拟响应
+
 ## 📝 注意事项
 
-- 首次使用需要在 Clawdbot 运行时才能使用完整功能
+- 首次使用推荐先测试"页面提取"和"推特爬虫"功能
 - 推文提取只在 twitter.com 有效
 - 页面内容最多提取 5000 字符
 
