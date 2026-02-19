@@ -1,0 +1,63 @@
+{
+  "AI技术": {
+    "description": "AI/ML 核心人物，关注技术突破和算法研究",
+    "accounts": [
+      "karpathy",
+      "sama", 
+      "gdb",
+      "ylecun",
+      "AndrewYNg",
+      "goodfellow_ian",
+      "demishassabis",
+      "jeffdean",
+      "doriangpt",
+      "swyx",
+      "fchollet"
+    ],
+    "tags": ["AI", "ML", "深度学习", "AGI", "算法优化"]
+  },
+  
+  "创业投资": {
+    "description": "创业者和投资人，关注行业趋势和商业洞察",
+    "accounts": [
+      "paulg",
+      "naval",
+      "patrickc",
+      "elerianm",
+      "balajis",
+      "packym",
+      "cburniske"
+    ],
+    "tags": ["创业", "投资", "YC", "融资", "商业模式"]
+  },
+  
+  "技术编程": {
+    "description": "技术专家，关注编程和系统设计",
+    "accounts": [
+      "antirez",
+      "pgbovine"
+    ],
+    "tags": ["编程", "开源", "系统设计", "工具"]
+  },
+  
+  "科技高管": {
+    "description": "科技公司 CEO，关注公司战略和产品发布",
+    "accounts": [
+      "elonmusk",
+      "satlopz",
+      "sundarpichai",
+      "tim_cook"
+    ],
+    "tags": ["CEO", "产品发布", "公司战略", "行业影响"]
+  },
+  
+  "科技媒体": {
+    "description": "科技媒体人和分析师，关注行业分析和趋势解读",
+    "accounts": [
+      "CaseyNewton",
+      "reckless",
+      "benedictevans"
+    ],
+    "tags": ["科技媒体", "行业分析", "趋势解读", "深度报道"]
+  }
+}
