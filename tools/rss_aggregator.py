@@ -123,19 +123,100 @@ def format_item(item: Dict[str, Any]) -> str:
 🔗 {item['link']}
 """
 
+def analyze_value_for_user(item: Dict[str, Any]) -> Dict[str, List[str]]:
+    """分析对用户的价值"""
+    title = item.get("title", "").lower()
+    summary = item.get("summary", "").lower()
+    text = title + " " + summary
+    
+    values = []
+    
+    # 技术学习
+    if any(kw in text for kw in ["tutorial", "how to", "guide", "implement"]):
+        values.append("📚 技术教程")
+    
+    # 创业灵感
+    if any(kw in text for kw in ["startup", "business", "product", "market"]):
+        values.append("💡 创业灵感")
+    
+    # 投资决策
+    if any(kw in text for kw in ["trend", "future", "prediction", "analysis"]):
+        values.append("📊 趋势分析")
+    
+    # AI前沿
+    if any(kw in text for kw in ["llm", "gpt", "transformer", "agent"]):
+        values.append("🤖 AI前沿")
+    
+    # 代码实践
+    if any(kw in text for kw in ["github", "code", "library", "tool"]):
+        values.append("💻 代码实践")
+    
+    return {
+        "values": values if values else ["📖 一般资讯"],
+        "actionable": "✅ 可直接应用" if item["actionability"] > 0.2 else "📚 建议学习"
+    }
+
+def analyze_value_for_glm(item: Dict[str, Any]) -> Dict[str, List[str]]:
+    """分析对 GLM 的价值"""
+    title = item.get("title", "").lower()
+    summary = item.get("summary", "").lower()
+    text = title + " " + summary
+    
+    values = []
+    
+    # 记忆系统
+    if any(kw in text for kw in ["memory", "retrieval", "context", "attention"]):
+        values.append("🧠 改进记忆检索")
+    
+    # 多AI协作
+    if any(kw in text for kw in ["agent", "multi-agent", "collaboration", "coordination"]):
+        values.append("🤝 优化AI协作")
+    
+    # NLP能力
+    if any(kw in text for kw in ["nlp", "language", "generation", "understanding"]):
+        values.append("💬 增强语言能力")
+    
+    # 工具集成
+    if any(kw in text for kw in ["tool", "api", "integration", "automation"]):
+        values.append("🔧 工具集成")
+    
+    # 知识管理
+    if any(kw in text for kw in ["knowledge", "graph", "embedding", "vector"]):
+        values.append("📚 知识管理")
+    
+    return {
+        "values": values if values else ["📖 一般参考"],
+        "integrable": "✅ 可集成到 Memory Lab" if item["ai_relevance"] > 0.2 else "📚 可学习参考"
+    }
+
 def format_for_telegram(top_items: List[Dict[str, Any]]) -> str:
-    """格式化为 Telegram 消息"""
+    """格式化为 Telegram 消息（详细版）"""
     msg = "🧠 **每日科技精选**\n"
     msg += f"📅 {datetime.now().strftime('%Y-%m-%d')}\n"
     msg += "─" * 30 + "\n\n"
 
     for i, item in enumerate(top_items, 1):
         emoji = "🔥" if item["aidar_score"] > 0.3 else "📌"
-        msg += f"{i}. {emoji} **{item['title'][:60]}...**\n"
-        msg += f"   📂 {item['category']} | 评分 {item['aidar_score']}\n"
-        msg += f"   🔗 {item['link']}\n\n"
+        msg += f"{i}. {emoji} **{item['title'][:80]}**\n"
+        msg += f"   📂 {item['category']} | 评分 {item['aidar_score']}\n\n"
+        
+        # 对用户的价值
+        user_value = analyze_value_for_user(item)
+        msg += f"   **对你的价值**：\n"
+        for v in user_value["values"][:3]:
+            msg += f"   • {v}\n"
+        msg += f"   • {user_value['actionable']}\n\n"
+        
+        # 对 GLM 的价值
+        glm_value = analyze_value_for_glm(item)
+        msg += f"   **对 GLM 的价值**：\n"
+        for v in glm_value["values"][:3]:
+            msg += f"   • {v}\n"
+        msg += f"   • {glm_value['integrable']}\n\n"
+        
+        msg += f"   🔗 {item['link']}\n"
+        msg += "─" * 30 + "\n\n"
 
-    msg += "─" * 30 + "\n"
     msg += "🤖 Memory Lab Team (GLM + DeepSeek + Clawdbot)"
 
     return msg
