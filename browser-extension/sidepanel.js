@@ -5,7 +5,7 @@ class ClawdAssistant {
     this.chatContainer = document.getElementById('chat');
     this.userInput = document.getElementById('userInput');
     this.statusDiv = document.getElementById('status');
-    this.apiEndpoint = 'http://localhost:3000/api/chat'; // Clawdbot API
+    this.apiEndpoint = 'http://localhost:18791/api/chat'; // Clawdbot API (GLM port)
     
     this.init();
   }
