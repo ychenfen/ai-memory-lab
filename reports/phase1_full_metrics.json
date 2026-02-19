@@ -1,0 +1,49 @@
+{
+  "metrics": {
+    "recall": 1.0,
+    "precision": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "tp": 5,
+    "fp": 0,
+    "fn": 0
+  },
+  "score_distribution": {
+    "min": 0.4,
+    "max": 0.8,
+    "avg": 0.5334,
+    "count": 5
+  },
+  "candidates": [
+    {
+      "id": "L20260218-001",
+      "trigger": "YAML 配置文件解析失败",
+      "score": 0.8,
+      "lesson_id": "L20260218-001"
+    },
+    {
+      "id": "L20260218-002",
+      "trigger": "社交媒体抓取工具无法登录",
+      "score": 0.4,
+      "lesson_id": "L20260218-002"
+    },
+    {
+      "id": "L20260218-003",
+      "trigger": "MCP 工具连接失败",
+      "score": 0.4,
+      "lesson_id": "L20260218-003"
+    },
+    {
+      "id": "L20260218-004",
+      "trigger": "记忆文件超过 200 行",
+      "score": 0.4,
+      "lesson_id": "L20260218-004"
+    },
+    {
+      "id": "L20260218-005",
+      "trigger": "群聊中 bot 不响应",
+      "score": 0.667,
+      "lesson_id": "L20260218-005"
+    }
+  ]
+}
