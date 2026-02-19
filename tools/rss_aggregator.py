@@ -123,6 +123,41 @@ def format_item(item: Dict[str, Any]) -> str:
 🔗 {item['link']}
 """
 
+def format_for_telegram(top_items: List[Dict[str, Any]]) -> str:
+    """格式化为 Telegram 消息"""
+    msg = "🧠 **每日科技精选**\n"
+    msg += f"📅 {datetime.now().strftime('%Y-%m-%d')}\n"
+    msg += "─" * 30 + "\n\n"
+
+    for i, item in enumerate(top_items, 1):
+        emoji = "🔥" if item["aidar_score"] > 0.3 else "📌"
+        msg += f"{i}. {emoji} **{item['title'][:60]}...**\n"
+        msg += f"   📂 {item['category']} | 评分 {item['aidar_score']}\n"
+        msg += f"   🔗 {item['link']}\n\n"
+
+    msg += "─" * 30 + "\n"
+    msg += "🤖 Memory Lab Team (GLM + DeepSeek + Clawdbot)"
+
+    return msg
+
+def send_to_telegram(message: str) -> bool:
+    """发送到 Telegram（通过 clawdbot）"""
+    try:
+        import requests
+        # 使用本地 clawdbot API
+        response = requests.post(
+            "http://localhost:3000/api/send",
+            json={
+                "channel": "telegram",
+                "message": message
+            },
+            timeout=10
+        )
+        return response.status_code == 200
+    except Exception as e:
+        print(f"❌ Telegram 推送失败: {e}")
+        return False
+
 def main():
     print("🧠 多源 RSS 聚合器 - 科技内容学习")
     print("=" * 60)
@@ -152,6 +187,14 @@ def main():
         }, f, indent=2, ensure_ascii=False)
 
     print(f"\n💾 已保存到 {output_path}")
+
+    # Telegram 推送
+    if top_items:
+        msg = format_for_telegram(top_items)
+        if send_to_telegram(msg):
+            print("✅ 已推送到 Telegram")
+        else:
+            print("⚠️ Telegram 推送失败，内容已保存")
 
 if __name__ == '__main__':
     import os
